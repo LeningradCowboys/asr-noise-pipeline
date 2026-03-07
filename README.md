@@ -50,7 +50,9 @@ dvc plots show     # noise-level vs. error-rate curves
 ```
 
 Plot for English, Polish, Portuguese, and Italien looks like:
-![alt text](per_vs_snr_en-pl-pt-it.png)
+
+<img width="500" alt="per_vs_snr_en-pl-pt-it" src="https://github.com/user-attachments/assets/b7f77da1-0030-4a60-a31b-b4a54e637588" />
+
 The data folder originally has 5 subfolders
   data/
     manifests/
