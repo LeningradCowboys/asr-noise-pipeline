@@ -1,0 +1,103 @@
+stages:
+  make_manifest:
+    foreach: ${languages}
+    do:
+      cmd: python src/make_manifest.py --lang ${item}
+      deps:
+        - src/make_manifest.py
+        - data/raw/${item}/wav
+      outs:
+        - data/manifests/${item}/clean_raw.jsonl
+
+  add_phonemes:
+    foreach: ${languages}
+    do:
+      cmd: python src/add_phonemes.py --lang ${item}
+      deps:
+        - src/add_phonemes.py
+        - data/manifests/${item}/clean_raw.jsonl
+      outs:
+        - data/manifests/${item}/clean.jsonl
+
+  add_noise:
+    foreach: ${languages}
+    do:
+      cmd: python src/make_noisy.py --lang ${item}
+      deps:
+        - src/make_noisy.py
+        - src/add_noise.py
+        - data/manifests/${item}/clean.jsonl
+      params:
+        - snr_levels
+        - noise_seed
+      outs:
+        - data/noisy/${item}
+        - data/manifests/${item}/noisy_snr-5.jsonl
+        - data/manifests/${item}/noisy_snr0.jsonl
+        - data/manifests/${item}/noisy_snr5.jsonl
+        - data/manifests/${item}/noisy_snr10.jsonl
+        - data/manifests/${item}/noisy_snr15.jsonl
+        - data/manifests/${item}/noisy_snr20.jsonl
+        - data/manifests/${item}/noisy_snr25.jsonl
+        - data/manifests/${item}/noisy_snr30.jsonl
+        - data/manifests/${item}/noisy_snr35.jsonl
+        - data/manifests/${item}/noisy_snr40.jsonl
+
+  predict:
+    foreach: ${languages}
+    do:
+      cmd: python src/predict.py --lang ${item}
+      deps:
+        - src/predict.py
+        - data/manifests/${item}/noisy_snr-5.jsonl
+        - data/manifests/${item}/noisy_snr0.jsonl
+        - data/manifests/${item}/noisy_snr5.jsonl
+        - data/manifests/${item}/noisy_snr10.jsonl
+        - data/manifests/${item}/noisy_snr15.jsonl
+        - data/manifests/${item}/noisy_snr20.jsonl
+        - data/manifests/${item}/noisy_snr25.jsonl
+        - data/manifests/${item}/noisy_snr30.jsonl
+        - data/manifests/${item}/noisy_snr35.jsonl
+        - data/manifests/${item}/noisy_snr40.jsonl
+      outs:
+        - data/manifests/${item}/preds_snr-5.jsonl
+        - data/manifests/${item}/preds_snr0.jsonl
+        - data/manifests/${item}/preds_snr5.jsonl
+        - data/manifests/${item}/preds_snr10.jsonl
+        - data/manifests/${item}/preds_snr15.jsonl
+        - data/manifests/${item}/preds_snr20.jsonl
+        - data/manifests/${item}/preds_snr25.jsonl
+        - data/manifests/${item}/preds_snr30.jsonl
+        - data/manifests/${item}/preds_snr35.jsonl
+        - data/manifests/${item}/preds_snr40.jsonl
+
+  evaluate:
+    foreach: ${languages}
+    do:
+      cmd: python src/evaluate.py --lang ${item}
+      deps:
+        - src/evaluate.py
+        - data/manifests/${item}/preds_snr-5.jsonl
+        - data/manifests/${item}/preds_snr0.jsonl
+        - data/manifests/${item}/preds_snr5.jsonl
+        - data/manifests/${item}/preds_snr10.jsonl
+        - data/manifests/${item}/preds_snr15.jsonl
+        - data/manifests/${item}/preds_snr20.jsonl
+        - data/manifests/${item}/preds_snr25.jsonl
+        - data/manifests/${item}/preds_snr30.jsonl
+        - data/manifests/${item}/preds_snr35.jsonl
+        - data/manifests/${item}/preds_snr40.jsonl
+      metrics:
+        - data/metrics/${item}/per_all.json:
+            cache: false
+
+  plot:
+    cmd: python src/plot.py
+    deps:
+      - src/plot.py
+      - data/metrics
+    params:
+      - languages
+    plots:
+      - data/plots/:
+          cache: false

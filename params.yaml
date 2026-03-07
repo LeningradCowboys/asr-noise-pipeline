@@ -1,0 +1,3 @@
+languages: [en, pl, pt, it]
+snr_levels: [-5, 0, 5, 10, 15, 20, 25, 30, 35, 40]
+noise_seed: 42

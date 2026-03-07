@@ -1,0 +1,8 @@
+data/noisy/
+data/manifests/
+data/metrics/
+data/plots/
+temp.flac
+__pycache__/
+*.pyc
+.env

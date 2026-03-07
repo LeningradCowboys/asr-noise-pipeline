@@ -1,0 +1,1019 @@
+schema: '2.0'
+stages:
+  make_manifest@en:
+    cmd: python src/make_manifest.py --lang en
+    deps:
+    - path: data/raw/en/wav
+      hash: md5
+      md5: e4eaf7bad20869002a082bccc994c7a2.dir
+      size: 9099178
+      nfiles: 67
+    - path: src/make_manifest.py
+      hash: md5
+      md5: 67b6c02cb8dbd81aba0bfc312af003d2
+      size: 3056
+    outs:
+    - path: data/manifests/en/clean_raw.jsonl
+      hash: md5
+      md5: 0e5adad61f2d3abd080f94452715781a
+      size: 22241
+  add_phonemes@en:
+    cmd: python src/add_phonemes.py --lang en
+    deps:
+    - path: data/manifests/en/clean_raw.jsonl
+      hash: md5
+      md5: 0e5adad61f2d3abd080f94452715781a
+      size: 22241
+    - path: src/add_phonemes.py
+      hash: md5
+      md5: 4bcea1776255dfe05ae56926dab4356f
+      size: 1685
+    outs:
+    - path: data/manifests/en/clean.jsonl
+      hash: md5
+      md5: ca86df32fbbd69f8436e2bc1601746a9
+      size: 31390
+  add_noise@en:
+    cmd: python src/make_noisy.py --lang en
+    deps:
+    - path: data/manifests/en/clean.jsonl
+      hash: md5
+      md5: ca86df32fbbd69f8436e2bc1601746a9
+      size: 31390
+    - path: src/add_noise.py
+      hash: md5
+      md5: 96f3463c21b3ed114e3c949551af1cb8
+      size: 824
+    - path: src/make_noisy.py
+      hash: md5
+      md5: a166d1e2d2c66eecdd8fbbd9890edc26
+      size: 2206
+    params:
+      params.yaml:
+        noise_seed: 42
+        snr_levels:
+        - -5
+        - 0
+        - 5
+        - 10
+        - 15
+        - 20
+        - 25
+        - 30
+        - 35
+        - 40
+    outs:
+    - path: data/manifests/en/noisy_snr-5.jsonl
+      hash: md5
+      md5: b06ed3285b82c7b96a5d05538b8f350f
+      size: 31780
+    - path: data/manifests/en/noisy_snr0.jsonl
+      hash: md5
+      md5: 4edfa170955d563ae6838f4f32d5dc37
+      size: 31650
+    - path: data/manifests/en/noisy_snr10.jsonl
+      hash: md5
+      md5: b5abc399048f9015e689757b6595de6a
+      size: 31780
+    - path: data/manifests/en/noisy_snr15.jsonl
+      hash: md5
+      md5: f94d7ed8d60e256385c7280175181635
+      size: 31780
+    - path: data/manifests/en/noisy_snr20.jsonl
+      hash: md5
+      md5: a4f9f0c497accb454bf977a0b414bacf
+      size: 31780
+    - path: data/manifests/en/noisy_snr25.jsonl
+      hash: md5
+      md5: daa1e4ac0a7e4e98b9578c5c019a222c
+      size: 31780
+    - path: data/manifests/en/noisy_snr30.jsonl
+      hash: md5
+      md5: 328696067e87a137e087ee5ea326f331
+      size: 31780
+    - path: data/manifests/en/noisy_snr35.jsonl
+      hash: md5
+      md5: 458195e8a9c257420579df3d2a85a28e
+      size: 31780
+    - path: data/manifests/en/noisy_snr40.jsonl
+      hash: md5
+      md5: db0fa099c40de51215ce019bd7649705
+      size: 31780
+    - path: data/manifests/en/noisy_snr5.jsonl
+      hash: md5
+      md5: 4e9199d677eaaaabe25f0a993ab7bcf3
+      size: 31650
+    - path: data/noisy/en
+      hash: md5
+      md5: 488b83732022f2a899aad0e5b2488a17.dir
+      size: 110387524
+      nfiles: 650
+  predict@en:
+    cmd: python src/predict.py --lang en
+    deps:
+    - path: data/manifests/en/noisy_snr-5.jsonl
+      hash: md5
+      md5: b06ed3285b82c7b96a5d05538b8f350f
+      size: 31780
+    - path: data/manifests/en/noisy_snr0.jsonl
+      hash: md5
+      md5: 4edfa170955d563ae6838f4f32d5dc37
+      size: 31650
+    - path: data/manifests/en/noisy_snr10.jsonl
+      hash: md5
+      md5: b5abc399048f9015e689757b6595de6a
+      size: 31780
+    - path: data/manifests/en/noisy_snr15.jsonl
+      hash: md5
+      md5: f94d7ed8d60e256385c7280175181635
+      size: 31780
+    - path: data/manifests/en/noisy_snr20.jsonl
+      hash: md5
+      md5: a4f9f0c497accb454bf977a0b414bacf
+      size: 31780
+    - path: data/manifests/en/noisy_snr25.jsonl
+      hash: md5
+      md5: daa1e4ac0a7e4e98b9578c5c019a222c
+      size: 31780
+    - path: data/manifests/en/noisy_snr30.jsonl
+      hash: md5
+      md5: 328696067e87a137e087ee5ea326f331
+      size: 31780
+    - path: data/manifests/en/noisy_snr35.jsonl
+      hash: md5
+      md5: 458195e8a9c257420579df3d2a85a28e
+      size: 31780
+    - path: data/manifests/en/noisy_snr40.jsonl
+      hash: md5
+      md5: db0fa099c40de51215ce019bd7649705
+      size: 31780
+    - path: data/manifests/en/noisy_snr5.jsonl
+      hash: md5
+      md5: 4e9199d677eaaaabe25f0a993ab7bcf3
+      size: 31650
+    - path: src/predict.py
+      hash: md5
+      md5: 5621073f0b89f37a169e7f4558c08c64
+      size: 2775
+    outs:
+    - path: data/manifests/en/preds_snr-5.jsonl
+      hash: md5
+      md5: 1170f12961f53150b11faa9f88338c59
+      size: 35080
+    - path: data/manifests/en/preds_snr0.jsonl
+      hash: md5
+      md5: 9deef307d30aa4b089b86ad51481c82a
+      size: 39181
+    - path: data/manifests/en/preds_snr10.jsonl
+      hash: md5
+      md5: e35ec581624438e718443b5b572000f6
+      size: 43986
+    - path: data/manifests/en/preds_snr15.jsonl
+      hash: md5
+      md5: 4da503bf0414089fe469fedbfebc9d03
+      size: 45389
+    - path: data/manifests/en/preds_snr20.jsonl
+      hash: md5
+      md5: a9611792e35cd5c207d06636161f0ccc
+      size: 45585
+    - path: data/manifests/en/preds_snr25.jsonl
+      hash: md5
+      md5: c091872adc873f3fccb83a2d985bbca4
+      size: 45620
+    - path: data/manifests/en/preds_snr30.jsonl
+      hash: md5
+      md5: 3e9de0f9e5ff60387e0720889d09c2d8
+      size: 45618
+    - path: data/manifests/en/preds_snr35.jsonl
+      hash: md5
+      md5: 86c89293d47198143fdb6aae2e10b0dc
+      size: 45624
+    - path: data/manifests/en/preds_snr40.jsonl
+      hash: md5
+      md5: ae807faef0f9738460d4ad559e5b30c8
+      size: 45632
+    - path: data/manifests/en/preds_snr5.jsonl
+      hash: md5
+      md5: 34863c8b8284e3f4b46048ec6537a006
+      size: 41332
+  evaluate@en:
+    cmd: python src/evaluate.py --lang en
+    deps:
+    - path: data/manifests/en/preds_snr-5.jsonl
+      hash: md5
+      md5: 1170f12961f53150b11faa9f88338c59
+      size: 35080
+    - path: data/manifests/en/preds_snr0.jsonl
+      hash: md5
+      md5: 9deef307d30aa4b089b86ad51481c82a
+      size: 39181
+    - path: data/manifests/en/preds_snr10.jsonl
+      hash: md5
+      md5: e35ec581624438e718443b5b572000f6
+      size: 43986
+    - path: data/manifests/en/preds_snr15.jsonl
+      hash: md5
+      md5: 4da503bf0414089fe469fedbfebc9d03
+      size: 45389
+    - path: data/manifests/en/preds_snr20.jsonl
+      hash: md5
+      md5: a9611792e35cd5c207d06636161f0ccc
+      size: 45585
+    - path: data/manifests/en/preds_snr25.jsonl
+      hash: md5
+      md5: c091872adc873f3fccb83a2d985bbca4
+      size: 45620
+    - path: data/manifests/en/preds_snr30.jsonl
+      hash: md5
+      md5: 3e9de0f9e5ff60387e0720889d09c2d8
+      size: 45618
+    - path: data/manifests/en/preds_snr35.jsonl
+      hash: md5
+      md5: 86c89293d47198143fdb6aae2e10b0dc
+      size: 45624
+    - path: data/manifests/en/preds_snr40.jsonl
+      hash: md5
+      md5: ae807faef0f9738460d4ad559e5b30c8
+      size: 45632
+    - path: data/manifests/en/preds_snr5.jsonl
+      hash: md5
+      md5: 34863c8b8284e3f4b46048ec6537a006
+      size: 41332
+    - path: src/evaluate.py
+      hash: md5
+      md5: 99836e65debba7b7a36e096080cae607
+      size: 3396
+    outs:
+    - path: data/metrics/en/per_all.json
+      hash: md5
+      md5: 0535f50d396c13474e1b1e72484e1685
+      size: 681
+  plot:
+    cmd: python src/plot.py
+    deps:
+    - path: data/metrics
+      hash: md5
+      md5: 709d640923d13ca2cee1e995019d6759.dir
+      size: 4910
+      nfiles: 44
+    - path: src/plot.py
+      hash: md5
+      md5: 7bd149192e36fa847587e7a2b47b9c76
+      size: 1591
+    params:
+      params.yaml:
+        languages:
+        - en
+        - pl
+        - pt
+        - it
+    outs:
+    - path: data/plots/
+      hash: md5
+      md5: e216e0991d6c86a1398e6d51a4bd3562.dir
+      size: 77587
+      nfiles: 1
+  make_manifest@pl:
+    cmd: python src/make_manifest.py --lang pl
+    deps:
+    - path: data/raw/pl/wav
+      hash: md5
+      md5: 1aa71fd156aae877689bd4724f05f466.dir
+      size: 16052149
+      nfiles: 67
+    - path: src/make_manifest.py
+      hash: md5
+      md5: 67b6c02cb8dbd81aba0bfc312af003d2
+      size: 3056
+    outs:
+    - path: data/manifests/pl/clean_raw.jsonl
+      hash: md5
+      md5: c8151ed256149a05d33c494e4203595d
+      size: 30645
+  add_phonemes@pl:
+    cmd: python src/add_phonemes.py --lang pl
+    deps:
+    - path: data/manifests/pl/clean_raw.jsonl
+      hash: md5
+      md5: c8151ed256149a05d33c494e4203595d
+      size: 30645
+    - path: src/add_phonemes.py
+      hash: md5
+      md5: 4bcea1776255dfe05ae56926dab4356f
+      size: 1685
+    outs:
+    - path: data/manifests/pl/clean.jsonl
+      hash: md5
+      md5: aea2fad8c093871160e9d887644672ec
+      size: 47560
+  add_noise@pl:
+    cmd: python src/make_noisy.py --lang pl
+    deps:
+    - path: data/manifests/pl/clean.jsonl
+      hash: md5
+      md5: aea2fad8c093871160e9d887644672ec
+      size: 47560
+    - path: src/add_noise.py
+      hash: md5
+      md5: 96f3463c21b3ed114e3c949551af1cb8
+      size: 824
+    - path: src/make_noisy.py
+      hash: md5
+      md5: a166d1e2d2c66eecdd8fbbd9890edc26
+      size: 2206
+    params:
+      params.yaml:
+        noise_seed: 42
+        snr_levels:
+        - -5
+        - 0
+        - 5
+        - 10
+        - 15
+        - 20
+        - 25
+        - 30
+        - 35
+        - 40
+    outs:
+    - path: data/manifests/pl/noisy_snr-5.jsonl
+      hash: md5
+      md5: e8e7f4f69842bf446ae85927c21bbcae
+      size: 47956
+    - path: data/manifests/pl/noisy_snr0.jsonl
+      hash: md5
+      md5: db02c058a152e3fa7ed97a6d57228eec
+      size: 47824
+    - path: data/manifests/pl/noisy_snr10.jsonl
+      hash: md5
+      md5: 33c1878c16eed833373997ef5e9c15bb
+      size: 47956
+    - path: data/manifests/pl/noisy_snr15.jsonl
+      hash: md5
+      md5: 4362ad03bcaa6422ce65340b0842049b
+      size: 47956
+    - path: data/manifests/pl/noisy_snr20.jsonl
+      hash: md5
+      md5: 063fb4b911b9be2e67ae22a0eb609df0
+      size: 47956
+    - path: data/manifests/pl/noisy_snr25.jsonl
+      hash: md5
+      md5: 312cb3ab898d53c7159997d307abe090
+      size: 47956
+    - path: data/manifests/pl/noisy_snr30.jsonl
+      hash: md5
+      md5: 13b1342a97e19e5638471440f8185d45
+      size: 47956
+    - path: data/manifests/pl/noisy_snr35.jsonl
+      hash: md5
+      md5: f3a8e1e3ba5ff009ff9bae6d6efe60e0
+      size: 47956
+    - path: data/manifests/pl/noisy_snr40.jsonl
+      hash: md5
+      md5: 35875938a383ae6038ec801805dfe47f
+      size: 47956
+    - path: data/manifests/pl/noisy_snr5.jsonl
+      hash: md5
+      md5: 2b4e564b5391b9dab6513a620fa887b6
+      size: 47824
+    - path: data/noisy/pl
+      hash: md5
+      md5: ae089fca42e89da3bcef7956eeb43a80.dir
+      size: 214737289
+      nfiles: 660
+  make_manifest@pt:
+    cmd: python src/make_manifest.py --lang pt
+    deps:
+    - path: data/raw/pt/wav
+      hash: md5
+      md5: 76b7e6da2b9b6bb980ee3a6e667d5945.dir
+      size: 17688413
+      nfiles: 67
+    - path: src/make_manifest.py
+      hash: md5
+      md5: 67b6c02cb8dbd81aba0bfc312af003d2
+      size: 3056
+    outs:
+    - path: data/manifests/pt/clean_raw.jsonl
+      hash: md5
+      md5: 41c604449b122e5b5f1e53d830c4fa3d
+      size: 27615
+  make_manifest@it:
+    cmd: python src/make_manifest.py --lang it
+    deps:
+    - path: data/raw/it/wav
+      hash: md5
+      md5: 245ac912cb72a43cad8669a147b7765d.dir
+      size: 14167605
+      nfiles: 67
+    - path: src/make_manifest.py
+      hash: md5
+      md5: 67b6c02cb8dbd81aba0bfc312af003d2
+      size: 3056
+    outs:
+    - path: data/manifests/it/clean_raw.jsonl
+      hash: md5
+      md5: 1e69d125dff99e145dc25e3ed76beac8
+      size: 23795
+  add_phonemes@pt:
+    cmd: python src/add_phonemes.py --lang pt
+    deps:
+    - path: data/manifests/pt/clean_raw.jsonl
+      hash: md5
+      md5: 41c604449b122e5b5f1e53d830c4fa3d
+      size: 27615
+    - path: src/add_phonemes.py
+      hash: md5
+      md5: 4bcea1776255dfe05ae56926dab4356f
+      size: 1685
+    outs:
+    - path: data/manifests/pt/clean.jsonl
+      hash: md5
+      md5: 5908df7cea4a754d0bc57b268f8cb3e8
+      size: 44216
+  add_phonemes@it:
+    cmd: python src/add_phonemes.py --lang it
+    deps:
+    - path: data/manifests/it/clean_raw.jsonl
+      hash: md5
+      md5: 1e69d125dff99e145dc25e3ed76beac8
+      size: 23795
+    - path: src/add_phonemes.py
+      hash: md5
+      md5: 4bcea1776255dfe05ae56926dab4356f
+      size: 1685
+    outs:
+    - path: data/manifests/it/clean.jsonl
+      hash: md5
+      md5: e6e8a7a9c1c2d98833855728b21cda6c
+      size: 33107
+  add_noise@pt:
+    cmd: python src/make_noisy.py --lang pt
+    deps:
+    - path: data/manifests/pt/clean.jsonl
+      hash: md5
+      md5: 5908df7cea4a754d0bc57b268f8cb3e8
+      size: 44216
+    - path: src/add_noise.py
+      hash: md5
+      md5: 96f3463c21b3ed114e3c949551af1cb8
+      size: 824
+    - path: src/make_noisy.py
+      hash: md5
+      md5: a166d1e2d2c66eecdd8fbbd9890edc26
+      size: 2206
+    params:
+      params.yaml:
+        noise_seed: 42
+        snr_levels:
+        - -5
+        - 0
+        - 5
+        - 10
+        - 15
+        - 20
+        - 25
+        - 30
+        - 35
+        - 40
+    outs:
+    - path: data/manifests/pt/noisy_snr-5.jsonl
+      hash: md5
+      md5: d1a029005987137f1cd0de6532139046
+      size: 44612
+    - path: data/manifests/pt/noisy_snr0.jsonl
+      hash: md5
+      md5: 35e3207faa93ca6fc9f38c3c97646a49
+      size: 44480
+    - path: data/manifests/pt/noisy_snr10.jsonl
+      hash: md5
+      md5: 1d3663e31ef2bb069f826b7d2953c70e
+      size: 44612
+    - path: data/manifests/pt/noisy_snr15.jsonl
+      hash: md5
+      md5: 3e624875150f9613c82c01b164b5b0c2
+      size: 44612
+    - path: data/manifests/pt/noisy_snr20.jsonl
+      hash: md5
+      md5: ff6a2b4e3a5f4a4fc06b2dbc86de1824
+      size: 44612
+    - path: data/manifests/pt/noisy_snr25.jsonl
+      hash: md5
+      md5: 64959c6cd6816e25fef26297835924be
+      size: 44612
+    - path: data/manifests/pt/noisy_snr30.jsonl
+      hash: md5
+      md5: 774b119040319210b1e10a0126381777
+      size: 44612
+    - path: data/manifests/pt/noisy_snr35.jsonl
+      hash: md5
+      md5: bb95b3d4a0b2fed7b6b76463d18df69e
+      size: 44612
+    - path: data/manifests/pt/noisy_snr40.jsonl
+      hash: md5
+      md5: 22dcb80d29c05ccfa2fc8a93b2a2d4eb
+      size: 44612
+    - path: data/manifests/pt/noisy_snr5.jsonl
+      hash: md5
+      md5: 3257dec848c69a6a840472478eb29667
+      size: 44480
+    - path: data/noisy/pt
+      hash: md5
+      md5: 45138c470f878a44c646936d7b61532f.dir
+      size: 207457779
+      nfiles: 660
+  add_noise@it:
+    cmd: python src/make_noisy.py --lang it
+    deps:
+    - path: data/manifests/it/clean.jsonl
+      hash: md5
+      md5: e6e8a7a9c1c2d98833855728b21cda6c
+      size: 33107
+    - path: src/add_noise.py
+      hash: md5
+      md5: 96f3463c21b3ed114e3c949551af1cb8
+      size: 824
+    - path: src/make_noisy.py
+      hash: md5
+      md5: a166d1e2d2c66eecdd8fbbd9890edc26
+      size: 2206
+    params:
+      params.yaml:
+        noise_seed: 42
+        snr_levels:
+        - -5
+        - 0
+        - 5
+        - 10
+        - 15
+        - 20
+        - 25
+        - 30
+        - 35
+        - 40
+    outs:
+    - path: data/manifests/it/noisy_snr-5.jsonl
+      hash: md5
+      md5: cfd4965e8edb44386e023de3c4d2bf37
+      size: 33503
+    - path: data/manifests/it/noisy_snr0.jsonl
+      hash: md5
+      md5: c9faacf9188099c01419e7e50c1fb061
+      size: 33371
+    - path: data/manifests/it/noisy_snr10.jsonl
+      hash: md5
+      md5: fcbf10cd76d36745edbd2e37ff38a7f3
+      size: 33503
+    - path: data/manifests/it/noisy_snr15.jsonl
+      hash: md5
+      md5: 1e9509342c437a6691b9d48679d409f7
+      size: 33503
+    - path: data/manifests/it/noisy_snr20.jsonl
+      hash: md5
+      md5: 156ffdee6b7a5cd0c9b0210d8fc097df
+      size: 33503
+    - path: data/manifests/it/noisy_snr25.jsonl
+      hash: md5
+      md5: 85648cdd848d3efa10eb3ced50fcf41e
+      size: 33503
+    - path: data/manifests/it/noisy_snr30.jsonl
+      hash: md5
+      md5: c52a89bcfbcb5684c1bc0d7063e11473
+      size: 33503
+    - path: data/manifests/it/noisy_snr35.jsonl
+      hash: md5
+      md5: f546945912ba221a2a1a7ce7818ec090
+      size: 33503
+    - path: data/manifests/it/noisy_snr40.jsonl
+      hash: md5
+      md5: 28fce9d09afa1086b1f399ff5a27e158
+      size: 33503
+    - path: data/manifests/it/noisy_snr5.jsonl
+      hash: md5
+      md5: 186ccc3eff3940048b396467856b03d6
+      size: 33371
+    - path: data/noisy/it
+      hash: md5
+      md5: 017ab70a5596d2bb71173ad8095b4d5f.dir
+      size: 193284500
+      nfiles: 660
+  predict@pl:
+    cmd: python src/predict.py --lang pl
+    deps:
+    - path: data/manifests/pl/noisy_snr-5.jsonl
+      hash: md5
+      md5: e8e7f4f69842bf446ae85927c21bbcae
+      size: 47956
+    - path: data/manifests/pl/noisy_snr0.jsonl
+      hash: md5
+      md5: db02c058a152e3fa7ed97a6d57228eec
+      size: 47824
+    - path: data/manifests/pl/noisy_snr10.jsonl
+      hash: md5
+      md5: 33c1878c16eed833373997ef5e9c15bb
+      size: 47956
+    - path: data/manifests/pl/noisy_snr15.jsonl
+      hash: md5
+      md5: 4362ad03bcaa6422ce65340b0842049b
+      size: 47956
+    - path: data/manifests/pl/noisy_snr20.jsonl
+      hash: md5
+      md5: 063fb4b911b9be2e67ae22a0eb609df0
+      size: 47956
+    - path: data/manifests/pl/noisy_snr25.jsonl
+      hash: md5
+      md5: 312cb3ab898d53c7159997d307abe090
+      size: 47956
+    - path: data/manifests/pl/noisy_snr30.jsonl
+      hash: md5
+      md5: 13b1342a97e19e5638471440f8185d45
+      size: 47956
+    - path: data/manifests/pl/noisy_snr35.jsonl
+      hash: md5
+      md5: f3a8e1e3ba5ff009ff9bae6d6efe60e0
+      size: 47956
+    - path: data/manifests/pl/noisy_snr40.jsonl
+      hash: md5
+      md5: 35875938a383ae6038ec801805dfe47f
+      size: 47956
+    - path: data/manifests/pl/noisy_snr5.jsonl
+      hash: md5
+      md5: 2b4e564b5391b9dab6513a620fa887b6
+      size: 47824
+    - path: src/predict.py
+      hash: md5
+      md5: 5621073f0b89f37a169e7f4558c08c64
+      size: 2775
+    outs:
+    - path: data/manifests/pl/preds_snr-5.jsonl
+      hash: md5
+      md5: 861e118955d00c3ca7f9c84735c60511
+      size: 56270
+    - path: data/manifests/pl/preds_snr0.jsonl
+      hash: md5
+      md5: 2034d020589310705736720e58f97d2d
+      size: 65081
+    - path: data/manifests/pl/preds_snr10.jsonl
+      hash: md5
+      md5: 3f6b292c5d60b396a4dea36714efed4e
+      size: 68227
+    - path: data/manifests/pl/preds_snr15.jsonl
+      hash: md5
+      md5: b748f2aba7cd1b9c5040fd51af47ce87
+      size: 70995
+    - path: data/manifests/pl/preds_snr20.jsonl
+      hash: md5
+      md5: 8770a82c93abc792f2859229b8e13be7
+      size: 72290
+    - path: data/manifests/pl/preds_snr25.jsonl
+      hash: md5
+      md5: e4ccaf218a95c901e50cdb76ce42811a
+      size: 72482
+    - path: data/manifests/pl/preds_snr30.jsonl
+      hash: md5
+      md5: f2094aee368a8115b9df439b9bfa9603
+      size: 72449
+    - path: data/manifests/pl/preds_snr35.jsonl
+      hash: md5
+      md5: 9578803e8f7ec4b1c30cf2b035ad1366
+      size: 72432
+    - path: data/manifests/pl/preds_snr40.jsonl
+      hash: md5
+      md5: f67e32169533b7a1d522c006cf9b947c
+      size: 72545
+    - path: data/manifests/pl/preds_snr5.jsonl
+      hash: md5
+      md5: 4b7baf7be10f09059806470a3e189ac3
+      size: 66987
+  predict@pt:
+    cmd: python src/predict.py --lang pt
+    deps:
+    - path: data/manifests/pt/noisy_snr-5.jsonl
+      hash: md5
+      md5: d1a029005987137f1cd0de6532139046
+      size: 44612
+    - path: data/manifests/pt/noisy_snr0.jsonl
+      hash: md5
+      md5: 35e3207faa93ca6fc9f38c3c97646a49
+      size: 44480
+    - path: data/manifests/pt/noisy_snr10.jsonl
+      hash: md5
+      md5: 1d3663e31ef2bb069f826b7d2953c70e
+      size: 44612
+    - path: data/manifests/pt/noisy_snr15.jsonl
+      hash: md5
+      md5: 3e624875150f9613c82c01b164b5b0c2
+      size: 44612
+    - path: data/manifests/pt/noisy_snr20.jsonl
+      hash: md5
+      md5: ff6a2b4e3a5f4a4fc06b2dbc86de1824
+      size: 44612
+    - path: data/manifests/pt/noisy_snr25.jsonl
+      hash: md5
+      md5: 64959c6cd6816e25fef26297835924be
+      size: 44612
+    - path: data/manifests/pt/noisy_snr30.jsonl
+      hash: md5
+      md5: 774b119040319210b1e10a0126381777
+      size: 44612
+    - path: data/manifests/pt/noisy_snr35.jsonl
+      hash: md5
+      md5: bb95b3d4a0b2fed7b6b76463d18df69e
+      size: 44612
+    - path: data/manifests/pt/noisy_snr40.jsonl
+      hash: md5
+      md5: 22dcb80d29c05ccfa2fc8a93b2a2d4eb
+      size: 44612
+    - path: data/manifests/pt/noisy_snr5.jsonl
+      hash: md5
+      md5: 3257dec848c69a6a840472478eb29667
+      size: 44480
+    - path: src/predict.py
+      hash: md5
+      md5: 5621073f0b89f37a169e7f4558c08c64
+      size: 2775
+    outs:
+    - path: data/manifests/pt/preds_snr-5.jsonl
+      hash: md5
+      md5: bee1313bf08db18bf148f065119fcb37
+      size: 50378
+    - path: data/manifests/pt/preds_snr0.jsonl
+      hash: md5
+      md5: f7d9677d57bf8a2d7858f0207d614d6f
+      size: 58364
+    - path: data/manifests/pt/preds_snr10.jsonl
+      hash: md5
+      md5: 9b450795c16378a60f206c9d71707ec1
+      size: 64990
+    - path: data/manifests/pt/preds_snr15.jsonl
+      hash: md5
+      md5: f02819795fbaf44ddadb1cf468af245e
+      size: 66830
+    - path: data/manifests/pt/preds_snr20.jsonl
+      hash: md5
+      md5: f4d7c7733446072d2810146cb8827d06
+      size: 67324
+    - path: data/manifests/pt/preds_snr25.jsonl
+      hash: md5
+      md5: f358f072263663837d3997d9dab924e3
+      size: 67507
+    - path: data/manifests/pt/preds_snr30.jsonl
+      hash: md5
+      md5: b74c807f04575bcc6ff41a9bc0056d63
+      size: 67658
+    - path: data/manifests/pt/preds_snr35.jsonl
+      hash: md5
+      md5: ed66a2d0d7174b5d8113dba8cb4fcfd0
+      size: 67679
+    - path: data/manifests/pt/preds_snr40.jsonl
+      hash: md5
+      md5: 945dab786ad6c5a30e259e5c793d56b8
+      size: 67718
+    - path: data/manifests/pt/preds_snr5.jsonl
+      hash: md5
+      md5: 44a7419effbff90a5f3fa5dde9fae03d
+      size: 62702
+  predict@it:
+    cmd: python src/predict.py --lang it
+    deps:
+    - path: data/manifests/it/noisy_snr-5.jsonl
+      hash: md5
+      md5: cfd4965e8edb44386e023de3c4d2bf37
+      size: 33503
+    - path: data/manifests/it/noisy_snr0.jsonl
+      hash: md5
+      md5: c9faacf9188099c01419e7e50c1fb061
+      size: 33371
+    - path: data/manifests/it/noisy_snr10.jsonl
+      hash: md5
+      md5: fcbf10cd76d36745edbd2e37ff38a7f3
+      size: 33503
+    - path: data/manifests/it/noisy_snr15.jsonl
+      hash: md5
+      md5: 1e9509342c437a6691b9d48679d409f7
+      size: 33503
+    - path: data/manifests/it/noisy_snr20.jsonl
+      hash: md5
+      md5: 156ffdee6b7a5cd0c9b0210d8fc097df
+      size: 33503
+    - path: data/manifests/it/noisy_snr25.jsonl
+      hash: md5
+      md5: 85648cdd848d3efa10eb3ced50fcf41e
+      size: 33503
+    - path: data/manifests/it/noisy_snr30.jsonl
+      hash: md5
+      md5: c52a89bcfbcb5684c1bc0d7063e11473
+      size: 33503
+    - path: data/manifests/it/noisy_snr35.jsonl
+      hash: md5
+      md5: f546945912ba221a2a1a7ce7818ec090
+      size: 33503
+    - path: data/manifests/it/noisy_snr40.jsonl
+      hash: md5
+      md5: 28fce9d09afa1086b1f399ff5a27e158
+      size: 33503
+    - path: data/manifests/it/noisy_snr5.jsonl
+      hash: md5
+      md5: 186ccc3eff3940048b396467856b03d6
+      size: 33371
+    - path: src/predict.py
+      hash: md5
+      md5: 5621073f0b89f37a169e7f4558c08c64
+      size: 2775
+    outs:
+    - path: data/manifests/it/preds_snr-5.jsonl
+      hash: md5
+      md5: d42aefc072a7170f063caa900c735798
+      size: 39941
+    - path: data/manifests/it/preds_snr0.jsonl
+      hash: md5
+      md5: a3def63f3a4932bd15b66a9711cec711
+      size: 45419
+    - path: data/manifests/it/preds_snr10.jsonl
+      hash: md5
+      md5: 9f70f6a7e329e57e5da731a172fa4413
+      size: 47029
+    - path: data/manifests/it/preds_snr15.jsonl
+      hash: md5
+      md5: 1721e6e51087d2f9ccce7f4c1e38b7b2
+      size: 47490
+    - path: data/manifests/it/preds_snr20.jsonl
+      hash: md5
+      md5: c2de969d890d31a1720e999e31b9cbbb
+      size: 47656
+    - path: data/manifests/it/preds_snr25.jsonl
+      hash: md5
+      md5: 69648bcd3b8eb75227673012f2e26891
+      size: 47726
+    - path: data/manifests/it/preds_snr30.jsonl
+      hash: md5
+      md5: 0f5665b92bfdea0d4c6fef031b00e75b
+      size: 47727
+    - path: data/manifests/it/preds_snr35.jsonl
+      hash: md5
+      md5: 6480380bdfefa7d8ce85261390d4c9b5
+      size: 47742
+    - path: data/manifests/it/preds_snr40.jsonl
+      hash: md5
+      md5: c56cd5c4563f1c66e7134f12908a678b
+      size: 47769
+    - path: data/manifests/it/preds_snr5.jsonl
+      hash: md5
+      md5: bbe906145e6bff36b1bd697150ecbf73
+      size: 46594
+  evaluate@pl:
+    cmd: python src/evaluate.py --lang pl
+    deps:
+    - path: data/manifests/pl/preds_snr-5.jsonl
+      hash: md5
+      md5: 861e118955d00c3ca7f9c84735c60511
+      size: 56270
+    - path: data/manifests/pl/preds_snr0.jsonl
+      hash: md5
+      md5: 2034d020589310705736720e58f97d2d
+      size: 65081
+    - path: data/manifests/pl/preds_snr10.jsonl
+      hash: md5
+      md5: 3f6b292c5d60b396a4dea36714efed4e
+      size: 68227
+    - path: data/manifests/pl/preds_snr15.jsonl
+      hash: md5
+      md5: b748f2aba7cd1b9c5040fd51af47ce87
+      size: 70995
+    - path: data/manifests/pl/preds_snr20.jsonl
+      hash: md5
+      md5: 8770a82c93abc792f2859229b8e13be7
+      size: 72290
+    - path: data/manifests/pl/preds_snr25.jsonl
+      hash: md5
+      md5: e4ccaf218a95c901e50cdb76ce42811a
+      size: 72482
+    - path: data/manifests/pl/preds_snr30.jsonl
+      hash: md5
+      md5: f2094aee368a8115b9df439b9bfa9603
+      size: 72449
+    - path: data/manifests/pl/preds_snr35.jsonl
+      hash: md5
+      md5: 9578803e8f7ec4b1c30cf2b035ad1366
+      size: 72432
+    - path: data/manifests/pl/preds_snr40.jsonl
+      hash: md5
+      md5: f67e32169533b7a1d522c006cf9b947c
+      size: 72545
+    - path: data/manifests/pl/preds_snr5.jsonl
+      hash: md5
+      md5: 4b7baf7be10f09059806470a3e189ac3
+      size: 66987
+    - path: src/evaluate.py
+      hash: md5
+      md5: 99836e65debba7b7a36e096080cae607
+      size: 3396
+    outs:
+    - path: data/metrics/pl/per_all.json
+      hash: md5
+      md5: 8693884d7f9a6ae3395f235ec0bdd7ff
+      size: 680
+  evaluate@pt:
+    cmd: python src/evaluate.py --lang pt
+    deps:
+    - path: data/manifests/pt/preds_snr-5.jsonl
+      hash: md5
+      md5: bee1313bf08db18bf148f065119fcb37
+      size: 50378
+    - path: data/manifests/pt/preds_snr0.jsonl
+      hash: md5
+      md5: f7d9677d57bf8a2d7858f0207d614d6f
+      size: 58364
+    - path: data/manifests/pt/preds_snr10.jsonl
+      hash: md5
+      md5: 9b450795c16378a60f206c9d71707ec1
+      size: 64990
+    - path: data/manifests/pt/preds_snr15.jsonl
+      hash: md5
+      md5: f02819795fbaf44ddadb1cf468af245e
+      size: 66830
+    - path: data/manifests/pt/preds_snr20.jsonl
+      hash: md5
+      md5: f4d7c7733446072d2810146cb8827d06
+      size: 67324
+    - path: data/manifests/pt/preds_snr25.jsonl
+      hash: md5
+      md5: f358f072263663837d3997d9dab924e3
+      size: 67507
+    - path: data/manifests/pt/preds_snr30.jsonl
+      hash: md5
+      md5: b74c807f04575bcc6ff41a9bc0056d63
+      size: 67658
+    - path: data/manifests/pt/preds_snr35.jsonl
+      hash: md5
+      md5: ed66a2d0d7174b5d8113dba8cb4fcfd0
+      size: 67679
+    - path: data/manifests/pt/preds_snr40.jsonl
+      hash: md5
+      md5: 945dab786ad6c5a30e259e5c793d56b8
+      size: 67718
+    - path: data/manifests/pt/preds_snr5.jsonl
+      hash: md5
+      md5: 44a7419effbff90a5f3fa5dde9fae03d
+      size: 62702
+    - path: src/evaluate.py
+      hash: md5
+      md5: 99836e65debba7b7a36e096080cae607
+      size: 3396
+    outs:
+    - path: data/metrics/pt/per_all.json
+      hash: md5
+      md5: eff1eb183a1216713b10186e45f49296
+      size: 681
+  evaluate@it:
+    cmd: python src/evaluate.py --lang it
+    deps:
+    - path: data/manifests/it/preds_snr-5.jsonl
+      hash: md5
+      md5: d42aefc072a7170f063caa900c735798
+      size: 39941
+    - path: data/manifests/it/preds_snr0.jsonl
+      hash: md5
+      md5: a3def63f3a4932bd15b66a9711cec711
+      size: 45419
+    - path: data/manifests/it/preds_snr10.jsonl
+      hash: md5
+      md5: 9f70f6a7e329e57e5da731a172fa4413
+      size: 47029
+    - path: data/manifests/it/preds_snr15.jsonl
+      hash: md5
+      md5: 1721e6e51087d2f9ccce7f4c1e38b7b2
+      size: 47490
+    - path: data/manifests/it/preds_snr20.jsonl
+      hash: md5
+      md5: c2de969d890d31a1720e999e31b9cbbb
+      size: 47656
+    - path: data/manifests/it/preds_snr25.jsonl
+      hash: md5
+      md5: 69648bcd3b8eb75227673012f2e26891
+      size: 47726
+    - path: data/manifests/it/preds_snr30.jsonl
+      hash: md5
+      md5: 0f5665b92bfdea0d4c6fef031b00e75b
+      size: 47727
+    - path: data/manifests/it/preds_snr35.jsonl
+      hash: md5
+      md5: 6480380bdfefa7d8ce85261390d4c9b5
+      size: 47742
+    - path: data/manifests/it/preds_snr40.jsonl
+      hash: md5
+      md5: c56cd5c4563f1c66e7134f12908a678b
+      size: 47769
+    - path: data/manifests/it/preds_snr5.jsonl
+      hash: md5
+      md5: bbe906145e6bff36b1bd697150ecbf73
+      size: 46594
+    - path: src/evaluate.py
+      hash: md5
+      md5: 99836e65debba7b7a36e096080cae607
+      size: 3396
+    outs:
+    - path: data/metrics/it/per_all.json
+      hash: md5
+      md5: a1ed9502cf6883185ae177ef52a74baf
+      size: 679
