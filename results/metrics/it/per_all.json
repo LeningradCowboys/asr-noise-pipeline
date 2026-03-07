@@ -1,0 +1,52 @@
+[
+  {
+    "snr_db": -5,
+    "per": 1.145,
+    "lang": "it"
+  },
+  {
+    "snr_db": 0,
+    "per": 2.3047,
+    "lang": "it"
+  },
+  {
+    "snr_db": 5,
+    "per": 3.2309,
+    "lang": "it"
+  },
+  {
+    "snr_db": 10,
+    "per": 3.6151,
+    "lang": "it"
+  },
+  {
+    "snr_db": 15,
+    "per": 3.8121,
+    "lang": "it"
+  },
+  {
+    "snr_db": 20,
+    "per": 3.8935,
+    "lang": "it"
+  },
+  {
+    "snr_db": 25,
+    "per": 3.9217,
+    "lang": "it"
+  },
+  {
+    "snr_db": 30,
+    "per": 3.923,
+    "lang": "it"
+  },
+  {
+    "snr_db": 35,
+    "per": 3.9288,
+    "lang": "it"
+  },
+  {
+    "snr_db": 40,
+    "per": 3.9391,
+    "lang": "it"
+  }
+]
