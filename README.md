@@ -1,6 +1,6 @@
 # asr-noise-pipeline
 
-Effect of additive Gaussian noise on wav2vec2 phoneme recognition across four languages.
+Effect of additive Gaussian noise on wav2vec2 phoneme recognition across different languages.
 
 ## Prerequisites
 
