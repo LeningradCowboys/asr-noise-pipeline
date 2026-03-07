@@ -15,15 +15,9 @@ These must be installed at the system level before running the pipeline.
 > If the command is not found, add the install directory (e.g.
 > `C:\Program Files\eSpeak NG`) to your `PATH` manually.
 
-**libsndfile** (required by the `soundfile` Python package):
+**libsndfile** (required by the `soundfile` Python package).
 
-| OS | Command |
-|----|---------|
-| Ubuntu/Debian | `sudo apt install libsndfile1` |
-| macOS | `brew install libsndfile` |
-| Windows | Bundled in the `soundfile` wheel — no action needed |
-
-Dependencies declaration is in `pyproject.toml` and the actual resolution is in `uv.lock`.
+Full dependencies declaration is in `pyproject.toml` and the actual resolution is in `uv.lock`.
 
 ## Data
 
@@ -50,7 +44,9 @@ dvc plots show     # noise-level vs. error-rate curves
 ```
 
 Plot for English, Polish, Portuguese, and Italien looks like:
-![alt text](per_vs_snr_en-pl-pt-it.png)
+
+<img width="500" alt="per_vs_snr_en-pl-pt-it" src="https://github.com/user-attachments/assets/b7f77da1-0030-4a60-a31b-b4a54e637588" />
+
 The data folder originally has 5 subfolders
   data/
     manifests/
