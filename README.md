@@ -15,15 +15,9 @@ These must be installed at the system level before running the pipeline.
 > If the command is not found, add the install directory (e.g.
 > `C:\Program Files\eSpeak NG`) to your `PATH` manually.
 
-**libsndfile** (required by the `soundfile` Python package):
+**libsndfile** (required by the `soundfile` Python package).
 
-| OS | Command |
-|----|---------|
-| Ubuntu/Debian | `sudo apt install libsndfile1` |
-| macOS | `brew install libsndfile` |
-| Windows | Bundled in the `soundfile` wheel — no action needed |
-
-Dependencies declaration is in `pyproject.toml` and the actual resolution is in `uv.lock`.
+Full dependencies declaration is in `pyproject.toml` and the actual resolution is in `uv.lock`.
 
 ## Data
 
