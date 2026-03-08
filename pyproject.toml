@@ -15,6 +15,7 @@ dependencies = [
     "torch>=2.0",
     "transformers>=4.30", # Wav2Vec2ForCTC stable since 4.x; keep in sync with torch
     "matplotlib>=3.7",
+    "phonemizer>=3.0",
 ]
 
 [project.optional-dependencies]
@@ -25,3 +26,6 @@ resample = [
 # Non-pip prerequisites (document here, install manually):
 #   - Python >= 3.10
 #   - espeak-ng       (system binary used by src/add_phonemes.py)
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
