@@ -2,29 +2,48 @@
 
 Effect of additive Gaussian noise on wav2vec2 phoneme recognition across different languages.
 
-## Prerequisites
-
-Clone the repository:
+## Clone the repository
 
 ```bash
 git clone https://github.com/LeningradCowboys/asr-noise-pipeline.git
 cd asr-noise-pipeline
 ```
 
-Full dependencies declaration is in `pyproject.toml` and the actual resolution is in `uv.lock`. You can get all the dependencies by running `pip install -e .` in your environment.
+## Prerequisites
 
-The following must be installed at the system level before running the pipeline.
-
-**Python >= 3.10**
+Full dependencies declaration is in `pyproject.toml` and the actual resolution is in `uv.lock`. You can get all the dependencies by running `pip install -e .` in your environment. There are two system dependencies that need manual installation per OS.
 
 **espeak-ng** (used by `src/add_phonemes.py` to generate phoneme transcripts):
 
-> **Windows note:** Download the installer from the [espeak-ng releases page](https://github.com/espeak-ng/espeak-ng/releases). The Windows installer does not always add `espeak-ng` to `PATH`
-> automatically. After installing, verify with `espeak-ng --version` in a new terminal.
-> If the command is not found, add the install directory (e.g.
-> `C:\Program Files\eSpeak NG`) to your `PATH` manually.
+macOS:
+```bash
+brew install espeak-ng
+```
+
+Linux
+```bash
+apt install espeak-ng
+```
+
+Windows
+
+Download the installer from the [espeak-ng releases page](https://github.com/espeak-ng/espeak-ng/releases). The Windows installer does not always add `espeak-ng` to `PATH` automatically. After installing, verify with `espeak-ng --version` in a new terminal. If the command is not found, add the install directory (e.g.`C:\Program Files\eSpeak NG`) to your `PATH` manually.
 
 **libsndfile** (required by the `soundfile` Python package).
+
+macOS
+
+```bash
+brew install libsndfile
+```
+
+Linux
+
+Usually pre-installed; apt install libsndfile1 if not
+
+Windows
+
+Bundled in the soundfile wheel — nothing needed
 
 ## Data
 
