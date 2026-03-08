@@ -87,11 +87,13 @@ Plot for English, Polish, Portuguese, and Italien looks like:
 
 The data folder will have 5 subfolders after running.
 
-  data/
-    manifests/
-    metrics
-    noisy
-    plots/
-    raw/
+```
+data/
+├── manifests/
+├── metrics/
+├── noisy/
+├── plots/
+└── raw/
+```
 
 Raw data are saved on Dagshub. Other four folders are reproducible artifacts, which are commited as they are fully reproducible. I copy `manifests`, `metrics`, and `plots` to the `results` folder for reviewing convenience. 
