@@ -11,39 +11,41 @@ cd asr-noise-pipeline
 
 ## Prerequisites
 
-Full dependencies declaration is in `pyproject.toml` and the actual resolution is in `uv.lock`. You can get all the dependencies by running `pip install -e .` in your environment. There are two system dependencies that need manual installation per OS.
+Full dependencies declaration is in `pyproject.toml` and the actual resolution is in `uv.lock`. You can get all the dependencies by running 
+```bash
+pip install -e .
+```
+in your environment. 
 
-**espeak-ng** (used by `src/add_phonemes.py` to generate phoneme transcripts):
+There are two system dependencies that need manual installation per OS.
 
-macOS:
+### espeak-ng
+
+**macOS:**
 ```bash
 brew install espeak-ng
 ```
 
-Linux
+**Linux:**
 ```bash
 apt install espeak-ng
 ```
 
-Windows
+**Windows:**
 
 Download the installer from the [espeak-ng releases page](https://github.com/espeak-ng/espeak-ng/releases). The Windows installer does not always add `espeak-ng` to `PATH` automatically. After installing, verify with `espeak-ng --version` in a new terminal. If the command is not found, add the install directory (e.g.`C:\Program Files\eSpeak NG`) to your `PATH` manually.
 
-**libsndfile** (required by the `soundfile` Python package).
+### libsndfile
 
-macOS
+**macOS**
 
 ```bash
 brew install libsndfile
 ```
 
-Linux
+**Linux**: Usually pre-installed; `apt install libsndfile1` if not
 
-Usually pre-installed; apt install libsndfile1 if not
-
-Windows
-
-Bundled in the soundfile wheel — nothing needed
+**Windows**: Bundled in the soundfile wheel — nothing needed
 
 ## Data
 
