@@ -85,7 +85,7 @@ Plot for English, Polish, Portuguese, and Italien looks like:
 
 <img width="500" alt="per_vs_snr_en-pl-pt-it" src="https://github.com/user-attachments/assets/b7f77da1-0030-4a60-a31b-b4a54e637588" />
 
-The data folder will have 5 subfolders after running.
+The `data` folder will have 5 subfolders after running. Raw data are saved on Dagshub. Other four folders are reproducible artefacts, which are committed as they are fully reproducible.
 
 ```
 data/
@@ -96,4 +96,5 @@ data/
 └── raw/
 ```
 
-Raw data are saved on Dagshub. Other four folders are reproducible artifacts, which are commited as they are fully reproducible. I copy `manifests`, `metrics`, and `plots` to the `results` folder for reviewing convenience. 
+Note that artefacts are also saved in this folder `data`. The `results`folder of this repository is simply a copy of `manifests`, `metrics`, and `plots` of my experiment on the four languages for reviewing convenience. 
+
