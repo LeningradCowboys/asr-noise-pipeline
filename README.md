@@ -45,7 +45,7 @@ brew install libsndfile
 
 **Linux**: Usually pre-installed; `apt install libsndfile1` if not
 
-**Windows**: Bundled in the soundfile wheel — nothing needed
+**Windows**: Bundled in the soundfile wheel so nothing needed
 
 ## Data
 
